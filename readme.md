@@ -1,5 +1,3 @@
-## <center>video downloader</center>
-
 ### Features
    - youtube_dl based
    - quick playlist or video download
