@@ -1,13 +1,14 @@
-# <center>youtube_dl based python video downloader</center>
+## <center>video downloader</center>
 
-## Features
+### Features
+   - youtube_dl based
    - quick playlist or video download
    - support playlist and video download
    - simple usage
     <br>
     <br>
 
-## usage:
+### Usage
    - just open bettervideo.py
    - insert the playlist or video link
    - choose the file format
@@ -15,7 +16,7 @@
     <br>
     <br>
 
-## License
+### License
 
-   - This project is licensed under the [MIT](LICENSE) License
+   - this project is licensed under the [MIT](LICENSE) License
 
