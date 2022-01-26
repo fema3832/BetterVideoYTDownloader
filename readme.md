@@ -1,5 +1,5 @@
 ### Features
-   - youtube_dl based
+   - yt-dlp based
    - quick playlist or video download
    - support playlist and video download
    - simple usage
