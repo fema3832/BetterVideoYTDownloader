@@ -47,19 +47,24 @@ def DVideo():
 
                   if uformat in ['video','vid','v']:
                         ydl_opts = {
-                              'audioformat': 'bestvideo/best',
+                              'format': 'bestvideo/best',
                               'outtmpl': f'{path}/playlists/%(playlist_title)s/%(title)s.%(ext)s',
                         }
 
                   elif uformat in ['audio','aud','a']:
                         ydl_opts = {
-                              'audioformat': 'mp3',
+                              'format': 'bestaudio/best',
+                              'postprocessors': [{
+                                    'key': 'FFmpegExtractAudio',
+                                    'preferredcodec': 'mp3',
+                                    'preferredquality': '192',
+                              }],
                               'outtmpl': f'{path}/playlists/%(playlist_title)s/%(title)s.%(ext)s',
                         }
 
                   else:
                         ydl_opts = {
-                              'audioformat': 'bestvideo/best',
+                              'format': 'bestvideo/best',
                               'outtmpl': f'{path}/playlists/%(playlist_title)s/%(title)s.%(ext)s',
                         }
                         print("=== next time, enter a format type, now it will be a video automatically ===")
@@ -78,13 +83,18 @@ def DVideo():
                   # audio
                   elif uformat in ['a','audio','aud']:
                         ydl_opts = {
-                              'audioformat': 'mp3',
-                              'outtmpl': f'{path}/audio/%(title)s.%(ext)s',
+                              'format': 'bestaudio/best',
+                              'postprocessors': [{
+                                    'key': 'FFmpegExtractAudio',
+                                    'preferredcodec': 'mp3',
+                                    'preferredquality': '192',
+                              }],
+                              'outtmpl': f'{path}/audio/%(title)s.mp3',
                         }
 
                   # audio and video
                   elif uformat in ['va','audiovideo','all']:
-                        ydla = yt_dlp.YoutubeDL({'audioformat': 'mp3','outtmpl': f'{path}/audio/%(title)s.%(ext)s',})
+                        ydla = yt_dlp.YoutubeDL({'format': 'bestaudio/best','postprocessors': [{'key': 'FFmpegExtractAudio','preferredcodec': 'mp3','preferredquality': '192',}],'outtmpl': f'{path}/audio/%(title)s.%(ext)s'})
                         ydlv = yt_dlp.YoutubeDL({'format': 'bestvideo/best','outtmpl': f'{path}/video/%(title)s.%(ext)s',})
                         with ydlv:
                               result = ydlv.extract_info(
