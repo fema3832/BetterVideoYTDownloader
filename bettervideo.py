@@ -1,5 +1,5 @@
-import youtube_dl
-import datetime
+from datetime import datetime
+import yt_dlp
 import time
 import os
 
@@ -13,9 +13,9 @@ os.system("title " + "@fema3832")
 
 
 # helpfunctions - txttime, log =>
-t = time.localtime()
+t = time.localtime
 def txttime():
-    return datetime.datetime.now().strftime("%Y. %m. %d. - %H:%M:%S")
+    return datetime.now().strftime("%Y. %m. %d. - %H:%M:%S")
 
 def vlogToFile(dlink, dtitle, dformat):
       f = open('log.txt', 'a')
@@ -84,8 +84,8 @@ def DVideo():
 
                   # audio and video
                   elif uformat in ['va','audiovideo','all']:
-                        ydla = youtube_dl.YoutubeDL({'audioformat': 'mp3','outtmpl': f'{path}/audio/%(title)s.%(ext)s',})
-                        ydlv = youtube_dl.YoutubeDL({'format': 'bestvideo/best','outtmpl': f'{path}/video/%(title)s.%(ext)s',})
+                        ydla = yt_dlp.YoutubeDL({'audioformat': 'mp3','outtmpl': f'{path}/audio/%(title)s.%(ext)s',})
+                        ydlv = yt_dlp.YoutubeDL({'format': 'bestvideo/best','outtmpl': f'{path}/video/%(title)s.%(ext)s',})
                         with ydlv:
                               result = ydlv.extract_info(
                                     ulink,
@@ -95,10 +95,10 @@ def DVideo():
                         vtitle = video['title']
                         vlogToFile(ulink, vtitle, uformat)
 
-                        starttime = datetime.datetime.now()
+                        starttime = datetime.now()
                         ydla.download([ulink])
                         ydlv.download([ulink])
-                        endtime = datetime.datetime.now()
+                        endtime = datetime.now()
 
                         etime = str(endtime - starttime)
                         print(f"\nEstimated time: {etime[:-7]}")
@@ -115,7 +115,7 @@ def DVideo():
 
             # video info
             try:
-                  ydl = youtube_dl.YoutubeDL(ydl_opts)
+                  ydl = yt_dlp.YoutubeDL(ydl_opts)
                   with ydl:
                         result = ydl.extract_info(
                               ulink,
@@ -137,9 +137,9 @@ def DVideo():
                   plogToFile(ulink, vtitle, uformat)
 
 
-            starttime = datetime.datetime.now()
+            starttime = datetime.now()
             ydl.download([ulink])
-            endtime = datetime.datetime.now()
+            endtime = datetime.now()
 
             etime = str(endtime - starttime)
             print(f"\nEstimated time: {etime[:-7]}")
