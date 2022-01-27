@@ -47,7 +47,6 @@ def DVideo():
 
                   if uformat in ['video','vid','v']:
                         ydl_opts = {
-                              'format': 'bestvideo/best',
                               'outtmpl': f'{path}/playlists/%(playlist_title)s/%(title)s.%(ext)s',
                         }
 
@@ -64,7 +63,6 @@ def DVideo():
 
                   else:
                         ydl_opts = {
-                              'format': 'bestvideo/best',
                               'outtmpl': f'{path}/playlists/%(playlist_title)s/%(title)s.%(ext)s',
                         }
                         print("=== next time, enter a format type, now it will be a video automatically ===")
@@ -76,7 +74,6 @@ def DVideo():
                   # video
                   if uformat in ['v','video','vid']:
                         ydl_opts = {
-                              'format': 'bestvideo/best',
                               'outtmpl': f'{path}/video/%(title)s.%(ext)s',
                         }
 
@@ -93,9 +90,9 @@ def DVideo():
                         }
 
                   # audio and video
-                  elif uformat in ['va','audiovideo','all']:
+                  elif uformat in ['va','audiovideo','all','av']:
+                        ydlv = yt_dlp.YoutubeDL({'outtmpl': f'{path}/video/%(title)s.%(ext)s',})
                         ydla = yt_dlp.YoutubeDL({'format': 'bestaudio/best','postprocessors': [{'key': 'FFmpegExtractAudio','preferredcodec': 'mp3','preferredquality': '192',}],'outtmpl': f'{path}/audio/%(title)s.%(ext)s'})
-                        ydlv = yt_dlp.YoutubeDL({'format': 'bestvideo/best','outtmpl': f'{path}/video/%(title)s.%(ext)s',})
                         with ydlv:
                               result = ydlv.extract_info(
                                     ulink,
@@ -106,8 +103,8 @@ def DVideo():
                         vlogToFile(ulink, vtitle, uformat)
 
                         starttime = datetime.now()
-                        ydla.download([ulink])
                         ydlv.download([ulink])
+                        ydla.download([ulink])
                         endtime = datetime.now()
 
                         etime = str(endtime - starttime)
@@ -152,9 +149,9 @@ def DVideo():
             endtime = datetime.now()
 
             etime = str(endtime - starttime)
-            print(f"\nEstimated time: {etime[:-7]}")
-            print("== The function is restarting in 10 seconds ==")
-            time.sleep(10)
+            print(f"\n\nEstimated time: {etime[:-7]}")
+            print("== The function is restarting in 5 seconds ==")
+            time.sleep(5)
             clearConsole()
             return DVideo()
 
