@@ -10,9 +10,6 @@ path, filename = os.path.split(full_path)
 
 def clearConsole(): return os.system(
     'cls' if os.name in ('nt', 'dos') else 'clear')
-
-
-os.system("title " + "@fema3832")
 #===========================================#
 
 
@@ -25,11 +22,15 @@ def txttime():
 
 
 def vlogToFile(dlink, dtitle, dformat):
-    f = open('log.txt', 'a')
-    f.write(f"[{txttime()}] video link: {dlink}\n")
-    f.write(f"[{txttime()}] video title: {dtitle}\n")
-    f.write(f"[{txttime()}] format: {dformat}\n\n")
-    f.close()
+    try:
+        f = open('log.txt', 'a')
+        f.write(f"[{txttime()}] video link: {dlink}\n")
+        f.write(f"[{txttime()}] video title: {dtitle}\n")
+        f.write(f"[{txttime()}] format: {dformat}\n\n")
+        f.close()
+    except:
+        f.write(f"[{txttime()}] video link: {dlink}\n")
+        f.write(f"[{txttime()}] format: {dformat}\n\n")
 
 
 def plogToFile(dlink, dtitle, dformat):
@@ -40,12 +41,24 @@ def plogToFile(dlink, dtitle, dformat):
     f.close()
 
 
+asciilogo = """
+ /$$                   /$$     /$$                                    /$$       /$$
+| $$                  | $$    | $$                                   |__/      | $$
+| $$$$$$$   /$$$$$$  /$$$$$$ /$$$$$$    /$$$$$$   /$$$$$$  /$$    /$$ /$$  /$$$$$$$  /$$$$$$   /$$$$$$
+| $$__  $$ /$$__  $$|_  $$_/|_  $$_/   /$$__  $$ /$$__  $$|  $$  /$$/| $$ /$$__  $$ /$$__  $$ /$$__  $$
+| $$  \ $$| $$$$$$$$  | $$    | $$    | $$$$$$$$| $$  \__/ \  $$/$$/ | $$| $$  | $$| $$$$$$$$| $$  \ $$
+| $$  | $$| $$_____/  | $$ /$$| $$ /$$| $$_____/| $$        \  $$$/  | $$| $$  | $$| $$_____/| $$  | $$
+| $$$$$$$/|  $$$$$$$  |  $$$$/|  $$$$/|  $$$$$$$| $$         \  $/   | $$|  $$$$$$$|  $$$$$$$|  $$$$$$/
+|_______/  \_______/   \___/   \___/   \_______/|__/          \_/    |__/ \_______/ \_______/ \______/"""
 #===========================================#
 
+
 def DVideo():
+    os.system("title " + "@fema3832")
     isPlaylist = False
 
     clearConsole()
+    print(f"{asciilogo}\n\n")
     ulink = input("link: ")
     if ulink.startswith('https://www.youtube.com/') or ulink.startswith('https://youtu.be/'):
         if ulink.startswith('https://www.youtube.com/playlist?list='):
